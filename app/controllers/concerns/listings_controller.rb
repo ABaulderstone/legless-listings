@@ -19,6 +19,7 @@ class ListingsController < ApplicationController
     end 
     def new 
         #shows create form 
+        @listing = Listing.new
     end 
     def show 
         #shows current listing
