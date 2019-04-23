@@ -42,7 +42,7 @@ class ListingsController < ApplicationController
 
     private 
     def listing_params
-        params.require(:listing).permit(:title, :description, :breed_id, :sex, :price, :deposit, :date_of_birth, :diet)
+        params.require(:listing).permit(:title, :description, :breed_id, :sex, :price, :deposit, :date_of_birth, :diet, :picture)
     end 
     def set_breeds_and_sexes
         @breeds = Breed.all

@@ -1,6 +1,7 @@
 <h1> Snake Listing </h1>
 <%@listings.each do |listing|%>
 <div class="card">
+<%= image_tag listing.picture if listing.picture.attached?%>
 <p> <%=listing.title%></p>
 <p> <%=listing.description%></p>
 <p> <%=listing.breed.name%></p>
