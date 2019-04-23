@@ -1,11 +1,13 @@
 class ListingsController < ApplicationController
+    before_action :authenticate_user!, except: [:index, :show]
     before_action :set_listing, only: [:show, :edit, :update, :destroy]
+    before_action :authorise_user, only: [:edit, :update, :destroy]
     before_action :set_breeds_and_sexes, only: [:new, :edit]
+    
     
     def create 
         #create new listing
-        
-       @listing = Listing.create(listing_params)
+        @listing = current_user.listings.create(listing_params)
        if @listing.errors.any?
         @breeds = Breed.all
         @sexes = Listing.sexes.keys
@@ -49,6 +51,13 @@ class ListingsController < ApplicationController
         @sexes = Listing.sexes.keys
 
     end 
+
+    def authorise_user
+       if @listing.user_id != current_user.id
+        redirect_to listings_path
+       end
+    end
+   
     def set_listing 
         id = params[:id]
         @listing = Listing.find(id)
